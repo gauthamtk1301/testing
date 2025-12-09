@@ -1,0 +1,20 @@
+name: Deploy to dev
+
+on:
+  workflow_dispatch:  # manual trigger only
+
+jobs:
+  deploy:
+    name: "Deploy bundle"
+    runs-on: ubuntu-latest
+    environment: dev
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: databricks/setup-cli@main
+
+      - run: databricks bundle deploy
+        env:
+          DATABRICKS_TOKEN: "dapi175b2e27400344948b49ab6abc85141b"
+          DATABRICKS_BUNDLE_ENV: dev
